@@ -6,8 +6,8 @@ class Player {
   //required fields
   String _name;
   Position _position;
-  int _id;
-  int _power; //which is random
+  final int _id;
+  final int _power; //which is random
 
   //optional fields
   int? _age;
