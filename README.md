@@ -4,8 +4,6 @@ A console-based football (soccer) match simulator built with Dart. This project 
 
 This project was developed as a comprehensive exercise in OOP, demonstrating concepts like encapsulation, composition, and polymorphism.
 
-![Simulation Screenshot](https://i.imgur.com/gY8A2fM.png )
-*(You can replace this with a screenshot of your own program's output!)*
 
 ## 🌟 Features
 
