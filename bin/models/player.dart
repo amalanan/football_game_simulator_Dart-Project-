@@ -1,6 +1,5 @@
 import 'dart:math';
-
-enum Position { goalkeeper, defender, midfielder, forward }
+import 'models.dart';
 
 class Player {
   //required fields
@@ -13,14 +12,15 @@ class Player {
   int? _age;
   String? _nationality;
   int? _stamina;
-  List<String> _skills = [];
+  List<String> _skills;
   int? _jerseyNumber;
 
   Player({required String name, required int id, required Position position})
-      : _name = name,
-        _id = id,
-        _position = position,
-        _power = Random().nextInt(100) + 1;
+    : _name = name,
+      _id = id,
+      _position = position,
+      _power = Random().nextInt(100) + 1,
+      _skills = [];
 
   //randomly putting the power of the player from 1 to 100
   Player.withDetails({
@@ -32,16 +32,15 @@ class Player {
     int? stamina,
     List<String>? skills,
     int? jerseyNumber,
-  })
-      : _name = name,
-        _position = position,
-        _id = id,
-        _power = Random().nextInt(100) + 1,
-        _age = age,
-        _nationality = nationality,
-        _stamina = stamina,
-        _skills = skills ?? [],
-        _jerseyNumber = jerseyNumber;
+  }) : _name = name,
+       _position = position,
+       _id = id,
+       _power = Random().nextInt(100) + 1,
+       _age = age,
+       _nationality = nationality,
+       _stamina = stamina,
+       _skills = skills ?? [],
+       _jerseyNumber = jerseyNumber;
 
   //getters (encapsulation)
   String get name => _name;
@@ -75,39 +74,31 @@ class Player {
   }
 
   set age(int? value) {
-    if (value == null) {
-      _age = null;
-    } else if (value <= 0) {
-      throw ArgumentError('age must be greater than 0');
+    if (value != null && value <= 15) {
+      throw ArgumentError('Age must be greater than 15.');
     } else {
       _age = value;
     }
   }
 
   set nationality(String? value) {
-    if (value == null) {
-      _nationality = null;
-    } else if (value.isEmpty) {
-      throw ArgumentError('Nationality cannot be empty');
+    if (value != null && value.isEmpty) {
+      throw ArgumentError('Nationality cannot be an empty string.');
     } else {
       _nationality = value;
     }
   }
 
   set stamina(int? value) {
-    if (value == null) {
-      _stamina = null;
-    } else if (value < 0 || value > 100) {
-      throw ArgumentError('Stamina must be between 0 and 100');
+    if (value != null && (value < 0 || value > 100)) {
+      throw ArgumentError('Stamina must be between 0 and 100.');
     } else {
       _stamina = value;
     }
   }
 
   set skills(List<String>? value) {
-    if (value == null) {
-    print('no skills');
-    } else if (value.isEmpty) {
+    if (value == null || value.isEmpty) {
       throw ArgumentError('Skills list cannot be empty');
     } else {
       _skills = value;
@@ -115,10 +106,8 @@ class Player {
   }
 
   set jerseyNumber(int? value) {
-    if (value == null) {
-      _jerseyNumber = null;
-    } else if (value < 0 || value > 99) {
-      throw ArgumentError('Jersey number must be between 0 and 99');
+    if (value != null && (value < 1 || value > 99)) {
+      throw ArgumentError('Jersey number must be between 1 and 99.');
     } else {
       _jerseyNumber = value;
     }
@@ -127,13 +116,8 @@ class Player {
   // polymorphism (using the toString method from the Object class(the main parent of all classes))
   @override
   String toString() {
-    return 'Player $_name (#${_jerseyNumber ??
-        'no jersey Number'}), $_position\n'
-        'Power: $_power, Age: ${_age ??
-        'no age'}, Nationality: ${_nationality ??
-        'no nationality'}, Stamina: ${_stamina ??
-        'no stamina'}\n'
-        'Skills: ${_skills.isEmpty ? 'no skills': _skills.join(", ")}';
+    String posName =
+        _position.name[0].toUpperCase() + _position.name.substring(1);
+    return 'Player: $_name (#${_jerseyNumber ?? 'N/A'}) | Position: $posName | Power: $_power';
   }
 }
-
