@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-A sample command-line application with an entrypoint in `bin/`, library code
-in `lib/`, and example unit test in `test/`.
-=======
 # Football Game Simulator
 
 A console-based football (soccer) match simulator built with Dart. This project uses Object-Oriented Programming (OOP) principles and game theory to simulate a strategic match between two teams, taking into account player skills, trainer experience, team strategies, and other random factors.
